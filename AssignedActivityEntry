@@ -1,0 +1,33 @@
+public class AssignedActivityEntry {
+
+    public List<Assigned_Activity__c> ords {get; set;}
+     public String userId = UserInfo.getUserId();
+    private final Service_Plan__c parSer;
+    public AssignedActivityEntry(ApexPages.StandardController myController) {
+        parSer=(Service_Plan__c)myController.getrecord();
+        ords = new List<Assigned_Activity__c>();
+        Assigned_Activity__c ActEnt = new Assigned_Activity__c();
+        ActEnt.Service_Plan__c = parSer.id;
+        ActEnt.Assigned_To__c = userId;
+//        ActEnt.Account__c = parSer.Account__c;
+        ActEnt.Initiated__c = System.Today();
+        ActEnt.Action_Status__c = 'Assigned';
+        ords.add(ActEnt);}
+
+    public void addrow() {
+        Assigned_Activity__c ActEnt = new Assigned_Activity__c();
+        ActEnt.Service_Plan__c = parSer.id;
+        ords.add(ActEnt);}
+            
+    public void removerow(){
+        Integer i = ords.size();
+        ords.remove(i-1);}
+            
+    public PageReference save() {
+        insert ords;
+        //PageReference home = new PageReference('/home/home.jsp');
+        //home.setRedirect(true);
+        //return home; }}
+        PageReference parrec = new PageReference('/'+parSer.id);
+        parrec.setRedirect(true);
+        return parrec; }}
