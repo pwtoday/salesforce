@@ -9,7 +9,6 @@ public class AssignedActivityEntry {
         Assigned_Activity__c ActEnt = new Assigned_Activity__c();
         ActEnt.Service_Plan__c = parSer.id;
         ActEnt.Assigned_To__c = userId;
-//        ActEnt.Account__c = parSer.Account__c;
         ActEnt.Initiated__c = System.Today();
         ActEnt.Action_Status__c = 'Assigned';
         ords.add(ActEnt);}
